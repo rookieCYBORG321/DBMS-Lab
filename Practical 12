@@ -1,0 +1,84 @@
+Aim: Write a PL\SQL functions
+•	To find the largest number amongst given two numbers.
+•	To find the total number of employees from emp relation given the employee number.
+•	To return the email id of the employee consisting of firstname and lastname.
+
+
+Solution:
+1. To Find the Largest Number Between Two Numbers
+
+CREATE OR REPLACE FUNCTION largest_of_two(x IN INT, y IN INT) RETURN INT AS
+BEGIN
+    IF x > y THEN
+        RETURN x;
+    ELSE
+        RETURN y;
+    END IF;
+END;
+/
+
+Calling Function Directly in SQLPlus:
+SELECT largest_of_two(15, 10) FROM dual;
+
+2. To Find the Total Number of Employees
+
+CREATE OR REPLACE FUNCTION number_of_employees RETURN NUMBER AS
+    total NUMBER := 0;
+BEGIN
+    SELECT COUNT(*) INTO total FROM emp;
+    RETURN total;
+END;
+/
+
+3. To Return the Email ID of the Employee
+
+CREATE OR REPLACE FUNCTION email_return(v_fname mytable.fname%TYPE, v_lname mytable.lname%TYPE) RETURN VARCHAR2 AS
+BEGIN
+    RETURN v_fname || '.' || v_lname || '@sitnagpur.siu.edu.in';
+END;
+/
+Outcome: These functions collectively teach students how to perform various operations using PL/SQL functions, such as comparisons, aggregate queries, and string manipulations.
+
+
+
+1. Function to Find the Largest Number Between Two Numbers
+CREATE OR REPLACE FUNCTION largest_of_two(
+    x IN INT,
+    y IN INT
+) RETURN INT
+AS
+BEGIN
+    IF x > y THEN
+        RETURN x;
+    ELSE
+        RETURN y;
+    END IF;
+END;
+/
+Calling the Function in SQLPlus:
+SELECT largest_of_two(15, 10) FROM dual;
+
+2. Function to Find the Total Number of Employees
+CREATE OR REPLACE FUNCTION number_of_employees
+RETURN NUMBER
+AS
+    total NUMBER := 0;
+BEGIN
+    SELECT COUNT(*)
+    INTO total
+    FROM emp;
+
+    RETURN total;
+END;
+/
+
+3. Function to Return the Email ID of an Employee
+CREATE OR REPLACE FUNCTION email_return(
+    v_fname mytable.fname%TYPE,
+    v_lname mytable.lname%TYPE
+) RETURN VARCHAR2
+AS
+BEGIN
+    RETURN v_fname || '.' || v_lname || '@sitnagpur.siu.edu.in';
+END;
+/
