@@ -1,0 +1,83 @@
+Aim: Write a trigger to demonstrate the use of Row level trigger and Statement level trigger.
+
+Solution:
+Statement-Level Trigger:
+CREATE OR REPLACE TRIGGER trig_upt_student
+BEFORE UPDATE ON student
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('This is a statement-level trigger that got fired');
+END;
+/
+
+Row-Level Trigger:
+CREATE OR REPLACE TRIGGER trig_upt_student
+BEFORE UPDATE ON student FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Row-level trigger got fired');
+END;
+/
+Explanation:
+•	Statement-Level Trigger:
+o	The trig_upt_student trigger is a statement-level trigger that fires once before an UPDATE statement on the student table.
+o	It displays a message when the trigger is activated.
+•	Row-Level Trigger:
+o	Another trig_upt_student trigger is a row-level trigger that fires before each row is updated in the student table.
+o	It displays a message for each row that is affected by the UPDATE statement.
+Outcome: This practical demonstrates the difference between row-level and statement-level triggers, teaching students how to use each type effectively.
+
+
+
+1.Statement level Trigger
+CREATE OR REPLACE TRIGGER tri_st
+BEFORE UPDATE ON st_info
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('This is statement level trigger fixed');
+END;
+/
+SET SERVEROUTPUT ON;
+UPDATE st_info
+SET total = sub1 + sub2 + sub3 + sub4;
+SHOW ERRORS;#for compilation errors
+
+
+2.Row level Trigger
+CREATE OR REPLACE TRIGGER tri_row
+BEFORE UPDATE ON st_info
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('This is row level trigger fixed');
+END;
+/
+SET SERVEROUTPUT ON;
+UPDATE st_info
+SET total = sub1 + sub2 + sub3 + sub4
+WHERE sub1 > 80;
+
+
+3.Trigger for Sub marks validation
+CREATE OR REPLACE TRIGGER tri_ins
+BEFORE INSERT ON st_info
+FOR EACH ROW
+BEGIN
+   IF (:NEW.sub1 < 0 OR :NEW.sub1 > 100) THEN
+      DBMS_OUTPUT.PUT_LINE('Invalid marks in Subject 1');   
+   ELSIF (:NEW.sub2 < 0 OR :NEW.sub2 > 100) THEN
+      DBMS_OUTPUT.PUT_LINE('Invalid marks in Subject 2');      
+   ELSIF (:NEW.sub3 < 0 OR :NEW.sub3 > 100) THEN
+      DBMS_OUTPUT.PUT_LINE('Invalid marks in Subject 3');      
+   ELSIF (:NEW.sub4 < 0 OR :NEW.sub4 > 100) THEN
+      DBMS_OUTPUT.PUT_LINE('Invalid marks in Subject 4');      
+   ELSE
+      DBMS_OUTPUT.PUT_LINE('All subject marks are valid');
+   END IF;
+END;
+/
+SET SERVEROUTPUT ON;
+INSERT INTO st_info (ROLL, NAME, SUB1, SUB2, SUB3, SUB4, TOTAL, PERC, RESULT)
+VALUES (1, 'John', 120, 85, 90, 95, NULL, NULL, NULL);
+#output : Invalid marks in Subject 1
+
+9. update St_info set SUB1=Sub2+10 where SUB1 > 60;
+
+
+10.
