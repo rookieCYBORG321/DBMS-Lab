@@ -1,0 +1,142 @@
+Aim: Write a PL/SQL function to find the reverse of a number.
+
+Solution:
+CREATE OR REPLACE FUNCTION reverse_it(x IN INT) RETURN INT AS
+  z INT;
+  rev INT := 0;
+  r INT;
+BEGIN
+  WHILE x > 0 LOOP
+    r := MOD(x, 10);
+    rev := (rev * 10) + r;
+    x := TRUNC(x / 10);
+  END LOOP;
+  
+  z := rev;
+  RETURN z;
+END;
+/
+
+Calling in PL/SQL Block:
+BEGIN
+  DECLARE a INT := 123456789;
+  DECLARE c INT;
+  
+  c := reverse_it(a);
+  DBMS_OUTPUT.put_line('The reverse of number is ' || c);
+END;
+/
+Directly in SQL (if the function is deterministic and doesn't rely on PL/SQL features):
+SELECT reverse_it(123456789) FROM dual;
+*Note - DUAL is a special dummy table that exists in all Oracle databases. It is used primarily when you need to run a query that does not explicitly require a table reference, such as selecting a value, performing a calculation, or calling a function.
+
+Explanation:
+•	The reverse_it function accepts an integer (x) and returns its reverse.
+•	It uses a WHILE loop to extract each digit of the number, reverses it, and stores the result in rev.
+•	The reversed number is returned as the output.
+Outcome: This practical helps students understand how to manipulate numbers in PL/SQL using loops and return values from functions.
+
+
+
+
+# Functions in PL/SQL
+1 .Calculate Total, Percentage & Division
+CREATE OR REPLACE FUNCTION Function_1(
+marks1 NUMBER,
+marks2 NUMBER,
+marks3 NUMBER
+)
+RETURN NUMBER
+IS
+Total NUMBER;
+Perc  NUMBER;
+BEGIN
+Total := marks1 + marks2 + marks3;
+DBMS_OUTPUT.PUT_LINE('Total : ' || Total);
+Perc := Total / 3;
+DBMS_OUTPUT.PUT_LINE('Percentage : ' || Perc);
+IF Perc > 75 THEN
+DBMS_OUTPUT.PUT_LINE('Distinction Division');
+ELSIF Perc > 60 THEN
+DBMS_OUTPUT.PUT_LINE('First Class Division');
+ELSE
+DBMS_OUTPUT.PUT_LINE('Fail');
+END IF;
+RETURN Perc;
+END Function_1;
+/
+# Execution block
+SET SERVEROUTPUT ON;
+SELECT Function_1(35,55,85) FROM dual;
+# OUTPUT:
+FUNCTION_1(35,55,85)
+58.3333333
+Total : 175
+Percentage : 58.33
+Fail
+
+
+#other code for same problem 
+CREATE OR REPLACE FUNCTION Function_1(
+marks1 NUMBER,
+marks2 NUMBER,
+marks3 NUMBER
+)
+RETURN NUMBER
+IS
+Total NUMBER;
+Perc NUMBER;
+BEGIN
+Total := marks1 + marks2 + marks3;
+DBMS_OUTPUT.PUT_LINE('Total' || Total);
+Perc := Total / 3;
+DBMS_OUTPUT.PUT_LINE('Percentage' || Perc);
+IF Perc > 75 THEN
+DBMS_OUTPUT.PUT_LINE('Distinction Division');
+ELSIF Perc > 60 THEN
+DBMS_OUTPUT.PUT_LINE('First class Division');
+ELSE
+DBMS_OUTPUT.PUT_LINE('Fail');
+END IF;
+RETURN Perc;
+END Function_1;
+/
+SELECT Function_1(35,55,85) FROM dual;
+#OUTPUT:
+FUNCTION_1(35,55,85)
+58.3333333
+Total175
+Percentage58.3333333
+Fail
+
+
+2.Add Two Numbers
+CREATE OR REPLACE FUNCTION Add_Num(a IN INT, b IN INT)
+RETURN INT
+IS
+c INT;
+BEGIN
+c := a + b;
+RETURN c;
+END;
+/
+SELECT Add_Num(12, 14) FROM dual;
+OUTPUT:
+ADD_NUM(12,14)
+26
+
+
+3.Square of a Number
+CREATE OR REPLACE FUNCTION Sqrt_Num(a IN INT)
+RETURN INT
+IS
+c INT;
+BEGIN
+c := a * a;
+RETURN c;
+END;
+/
+SELECT Sqrt_Num(12) FROM dual;
+#OUTPUT:
+SQRT_NUM(12)
+144
