@@ -2,7 +2,7 @@ username: system
 password: Manager123
 
 	connect d1
-password: sql123
+password: sit
 
 
 
