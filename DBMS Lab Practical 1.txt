@@ -1,0 +1,44 @@
+username: system
+password: Manager123
+
+	connect d1
+password: sql123
+
+
+
+1. create a table st_info with attributes prn, name, m1, m2,m3:-
+	create table st_info (prn int, name varchar2(20), m1 number, m2 number, m3 number);
+
+2. to view the created table(s) that present in the database:-
+	select * from tab;
+
+3. to view the content in the table:-
+	select * from st_info;
+
+4. to display the structure of the table:-
+	desc st_info;
+
+5. to insert 10 rows in the table:-
+	insert into st_info (prn, name, m1, m2, m3) values (01, 'Patel', 91, 92, 93);
+	insert into st_info (prn, name, m1, m2, m3) values (02, 'Dhoke', 90, 89, 88);
+	insert into st_info (prn, name, m1, m2, m3) values (03, 'selukar', 87, 86, 85);
+	insert into st_info (prn, name, m1, m2, m3) values (04, 'Vishnu', 84, 85, 84);
+	insert into st_info (prn, name, m1, m2, m3) values (05, 'Raut', 83, 82, 81);
+	insert into st_info (prn, name, m1, m2, m3) values (06, 'Lakhe', 80, 79, 78);
+	insert into st_info (prn, name, m1, m2, m3) values (07, 'Mundle', 77, 76, 75);
+	insert into st_info (prn, name, m1, m2, m3) values (08, 'Purohit', 74, 73, 72);
+	insert into st_info (prn, name, m1, m2, m3) values (09, 'Madankar', 70, 69, 68);
+	insert into st_info (prn, name, m1, m2, m3) values (10, 'Band', 67, 66, 65);
+
+6. to set the line size:-
+	set linesize 150
+
+
+7. to add attribute total and perc to the table:-
+	alter table st_info add total number;
+	alter table st_info add perc number;
+
+8. to calculate total & perc:-
+	update st_info set total=m1+m2+m3;
+	update st_info set perc= total/3;
+	
